@@ -1,5 +1,7 @@
 # SNU Central
 
+**Live demo: [snu-central.streamlit.app](https://snu-central.streamlit.app/)** — ask a question about SNU policies and open any cited page of the source PDF.
+
 Ask a question about Shiv Nadar University's policies in plain words and get an answer built only from the official documents, with every statement linked to the document, page, section and paragraph it came from.
 
 The information-retrieval core (inverted index, TF-IDF + cosine, BM25, abstention gate, spelling correction) is our own code. An open-weight LLM (`openai/gpt-oss-120b` on Groq's free tier) only writes the final answer from the passages that retrieval selected.
@@ -13,6 +15,8 @@ The information-retrieval core (inverted index, TF-IDF + cosine, BM25, abstentio
 SNU Central is our end-semester project for **CSD358 Information Retrieval** at Shiv Nadar Institution of Eminence (Monsoon 2026). Students lose time hunting through long policy PDFs spread across several university websites; SNU Central lets them ask in their own words and shows exactly where each answer comes from, or says plainly when the documents don't cover it.
 
 On 25 test questions over 39 policy documents, BM25 reached an MRR of 0.792 (TF-IDF 0.581), the system declined all five off-topic questions without refusing any real one, and 94% of answer statements were supported by a cited passage.
+
+Try it at **https://snu-central.streamlit.app/** (the app may take about a minute to wake up if nobody has used it for a few days).
 
 **Team:** Vishnu Chundu · Poorab Mishra · Shreyas Achal · Mitaksh Goswami
 
