@@ -2,10 +2,12 @@
 .streamlit/secrets.toml
 .env
 
-# Generated data (rebuild with fetch.py / build_index.py)
-static/documents/**/*.pdf
+# Generated data (rebuilt by build_index.py, or automatically by app.py on first start).
+# The source PDFs (static/documents/) and their provenance (processed_data/manifest.csv) ARE committed,
+# so a fresh clone or a Streamlit Cloud deployment can build the index without fetching.
 processed_data/*
 !processed_data/.gitkeep
+!processed_data/manifest.csv
 indexes/*
 !indexes/.gitkeep
 logs/*

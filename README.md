@@ -6,6 +6,15 @@ The information-retrieval core (inverted index, TF-IDF + cosine, BM25, abstentio
 
 - Requirements: [`overview.md`](overview.md) (FR-x / NFR-x)
 - Design and the decisions behind it: [`system_design.md`](system_design.md) (§12 lists what changed during the build and why)
+- Project report (IEEE format): [`IR_REPORT.pdf`](IR_REPORT.pdf)
+
+## About
+
+SNU Central is our end-semester project for **CSD358 Information Retrieval** at Shiv Nadar Institution of Eminence (Monsoon 2026). Students lose time hunting through long policy PDFs spread across several university websites; SNU Central lets them ask in their own words and shows exactly where each answer comes from, or says plainly when the documents don't cover it.
+
+On 25 test questions over 39 policy documents, BM25 reached an MRR of 0.792 (TF-IDF 0.581), the system declined all five off-topic questions without refusing any real one, and 94% of answer statements were supported by a cited passage.
+
+**Team:** Vishnu Chundu · Poorab Mishra · Shreyas Achal · Mitaksh Goswami
 
 ---
 
@@ -23,9 +32,9 @@ echo 'GROQ_API_KEY=your_key' > .env
 # or: cp .streamlit/secrets.toml.example .streamlit/secrets.toml  and edit it
 # optional: echo 'GROQ_API_KEY_2=backup_key' >> .env   (used only if the first key is rejected)
 
-python fetch.py           # download the 39 source PDFs into static/documents/
-python build_index.py     # extract, clean, chunk, date, de-duplicate, index  (~6 s)
+python build_index.py     # extract, clean, chunk, date, de-duplicate, index  (~6 s; the app also does this on first start)
 streamlit run app.py      # open http://localhost:8501
+# optional: python fetch.py  re-downloads the 39 source PDFs from SNU and updates the manifest
 ```
 
 Without a key the app still works: it shows the relevant passages with their citations instead of a generated answer.
@@ -129,7 +138,7 @@ Hand-checked dates for documents the extractor cannot date go in `document_dates
 
 ## Data and usage
 
-All documents are publicly downloadable from snu.edu.in and snulinks.snu.edu.in; pages that need an SNU login are skipped, and the Dean's List archive (student names and roll numbers) is excluded. The SNU Links policies state that they are for the exclusive use of SNU and may not be stored in a retrieval system without permission, so **this app is for local use by SNU students and must not be deployed publicly** without the university's permission. PDFs, the index and logs are git-ignored. Query logs redact emails, phone and roll numbers.
+All documents are publicly downloadable from snu.edu.in and snulinks.snu.edu.in; pages that need an SNU login are skipped, and the Dean's List archive (student names and roll numbers) is excluded. The SNU Links policies carry a notice that they are for the exclusive use of SNU and may not be stored in a retrieval system without prior written permission. All documents remain the property of Shiv Nadar University; this project and its demo are a student course project intended for SNU students, and any document will be removed on the university's request. The source PDFs and their manifest are included in the repository so the app can build its index; generated data and logs are git-ignored. Query logs redact emails, phone and roll numbers.
 
 ## AI assistance (NFR-8.1)
 

@@ -8,6 +8,7 @@ from snu_central.config import load_config
 from snu_central.generation import Answer, answer_stream, is_declined
 from snu_central.generation.citations import strip_invalid
 from snu_central.generation.providers import LLMUnavailable, get_provider
+from snu_central.index.build import ensure_index
 from snu_central.retrieval import load_retriever
 from snu_central.ui.components import EXAMPLES, department_note, render_sources
 
@@ -23,8 +24,15 @@ except Exception:  # noqa: BLE001 - no secrets file is fine
 CFG = load_config()
 
 
+@st.cache_resource(show_spinner="Building the search index (first start only, about 10 seconds)…")
+def index_ready() -> bool:
+    """On a fresh deployment there is no index yet: build it once from the documents in static/documents/."""
+    return ensure_index(CFG)
+
+
 @st.cache_resource(show_spinner="Loading the index…")
 def get_retriever(ranker: str):
+    index_ready()
     return load_retriever(CFG, ranker)
 
 
