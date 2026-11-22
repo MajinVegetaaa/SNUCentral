@@ -2,6 +2,7 @@
 
 import re
 from datetime import date
+from urllib.parse import quote
 
 import streamlit as st
 
@@ -19,9 +20,16 @@ EXAMPLES = [
 _WORD = re.compile(r"[A-Za-z0-9]+(?:[-./'][A-Za-z0-9]+)*")
 
 
-def pdf_url(chunk: dict) -> str:
-    """Streamlit serves ./static at /app/static/ (enableStaticServing). Chrome honours #page=N (FR-6.3)."""
-    return f"/app/{chunk['file_path']}#page={chunk['page_number']}"
+def pdf_url(chunk: dict, base_url: str = "") -> str:
+    """Link that opens the source PDF at the cited page (FR-6.3); browsers honour #page=N.
+
+    `base_url` (config `app.pdf_base_url`) points at a CDN copy of the repository, e.g. jsDelivr. Streamlit Cloud's
+    small shared container streams 4-7 MB PDFs slowly; a CDN serves them in about a second with partial loading.
+    Empty = Streamlit's own static serving (./static at /app/static/), which is fine when running locally."""
+    path = chunk["file_path"]
+    if base_url:
+        return f"{base_url.rstrip('/')}/{quote(path)}#page={chunk['page_number']}"
+    return f"/app/{path}#page={chunk['page_number']}"
 
 
 def doc_date(chunk: dict) -> str:
@@ -53,7 +61,8 @@ def highlight(text: str, query_terms: set[str]) -> str:
     return _WORD.sub(sub, safe)
 
 
-def source_card(n: int, chunk: dict, score: float, query_terms: set[str], stale_years: int, cited: bool) -> None:
+def source_card(n: int, chunk: dict, score: float, query_terms: set[str], stale_years: int, cited: bool,
+                pdf_base_url: str = "") -> None:
     with st.container(border=True):
         ctx = chunk.get("_context")
         tag = ":green-badge[cited]" if cited else (":gray-badge[adjacent section]" if ctx else ":gray-badge[retrieved]")
@@ -70,21 +79,21 @@ def source_card(n: int, chunk: dict, score: float, query_terms: set[str], stale_
         if warn:
             st.warning(warn, icon=":material/schedule:")
         st.markdown(highlight(chunk["text"], query_terms))
-        st.link_button("Open PDF at this page", pdf_url(chunk), icon=":material/open_in_new:")
+        st.link_button("Open PDF at this page", pdf_url(chunk, pdf_base_url), icon=":material/open_in_new:")
 
 
 def render_sources(results, query_terms: set[str], cited: list[int], stale_years: int, title: str,
-                   expanded: bool | None = None) -> None:
+                   expanded: bool | None = None, pdf_base_url: str = "") -> None:
     """Cited passages are shown; the rest sit in an expander (open when nothing was cited, unless `expanded`)."""
     cited_set = set(cited)
     first = [(i, c, s) for i, (c, s) in enumerate(results, 1) if i in cited_set]
     rest = [(i, c, s) for i, (c, s) in enumerate(results, 1) if i not in cited_set]
     for i, c, s in first:
-        source_card(i, c, s, query_terms, stale_years, True)
+        source_card(i, c, s, query_terms, stale_years, True, pdf_base_url)
     if rest:
         with st.expander(f"{title} ({len(rest)})", expanded=(not first) if expanded is None else expanded):
             for i, c, s in rest:
-                source_card(i, c, s, query_terms, stale_years, False)
+                source_card(i, c, s, query_terms, stale_years, False, pdf_base_url)
 
 
 def department_note(results, cited: list[int]) -> str | None:

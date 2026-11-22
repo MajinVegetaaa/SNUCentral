@@ -50,3 +50,6 @@ llm:
 app:
   max_input_chars: 500
   stale_after_years: 3               # date warning on citations (FR-6.6)
+  # Where "Open PDF at this page" links point. A CDN copy of the GitHub repo loads 4-7 MB PDFs in ~1 s;
+  # set to "" to serve them from the app itself (/app/static/...), e.g. when working offline.
+  pdf_base_url: https://cdn.jsdelivr.net/gh/MajinVegetaaa/SNUCentral@main/

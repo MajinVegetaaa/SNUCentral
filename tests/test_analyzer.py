@@ -77,3 +77,11 @@ def test_staleness_warning_handles_month_precision():
     assert "Last revised 2013-02" in date_warning({"effective_date": "2013-02"}, 3)
     assert date_warning({"effective_date": "2099-01-01"}, 3) is None
     assert date_warning({"effective_date": ""}, 3) is None
+
+
+def test_pdf_links_local_and_cdn():
+    from snu_central.ui.components import pdf_url
+    c = {"file_path": "static/documents/finance/FN511 Fee Policy.pdf", "page_number": 12}
+    assert pdf_url(c) == "/app/static/documents/finance/FN511 Fee Policy.pdf#page=12"
+    assert pdf_url(c, "https://cdn.example/gh/u/r@main/") == \
+        "https://cdn.example/gh/u/r@main/static/documents/finance/FN511%20Fee%20Policy.pdf#page=12"

@@ -66,6 +66,7 @@ except (FileNotFoundError, RuntimeError) as e:
     st.stop()
 
 stale_years = CFG["app"]["stale_after_years"]
+pdf_base = CFG["app"].get("pdf_base_url", "")
 st.session_state.setdefault("messages", [])
 
 
@@ -88,7 +89,7 @@ def render_assistant(msg: dict) -> None:
         if ans.notice:
             st.warning(ans.notice, icon=":material/info:")
         render_sources(ans.results, terms, [], stale_years, "Closest sections found (probably not relevant)",
-                       expanded=False)
+                       expanded=False, pdf_base_url=pdf_base)
     elif msg["status"] == "answered":
         st.markdown(msg["text"])
         if ans.notice:
@@ -105,17 +106,17 @@ def render_assistant(msg: dict) -> None:
         note = department_note(ans.results, ans.citation.valid)
         if note:
             st.caption(note)
-        render_sources(ans.results, terms, ans.citation.valid, stale_years, "Other retrieved sections")
+        render_sources(ans.results, terms, ans.citation.valid, stale_years, "Other retrieved sections", pdf_base_url=pdf_base)
     elif msg["status"] == "abstained":
         st.info(msg["text"], icon=":material/search_off:")
         if n:
             render_sources(ans.results, terms, [], stale_years, "Closest sections found (probably not relevant)",
-                           expanded=False)
+                           expanded=False, pdf_base_url=pdf_base)
     else:  # fallback (FR-5.12)
         st.warning(msg["text"], icon=":material/cloud_off:")
         if ans.reason:
             st.caption(f"Reason: {ans.reason}")
-        render_sources(ans.results, terms, [], stale_years, "Relevant sections")
+        render_sources(ans.results, terms, [], stale_years, "Relevant sections", pdf_base_url=pdf_base)
 
 
 # ---- chat ------------------------------------------------------------------------------------
