@@ -1,0 +1,23 @@
+# Secrets
+.streamlit/secrets.toml
+.env
+
+# Generated data (rebuild with fetch.py / build_index.py)
+static/documents/**/*.pdf
+processed_data/*
+!processed_data/.gitkeep
+indexes/*
+!indexes/.gitkeep
+logs/*
+!logs/.gitkeep
+
+# Python / OS
+__pycache__/
+.venv/
+.pytest_cache/
+.DS_Store
+
+# Local secrets in any variant, and build artefacts
+.env*
+*.zip
+receipt-*.txt

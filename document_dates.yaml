@@ -1,0 +1,8 @@
+# Hand-checked document dates (FR-2.8, FR-6.6) for documents whose date the extractor cannot read.
+# Key: document title as in manifest.csv. Value: ISO date (YYYY-MM-DD or YYYY-MM), then the evidence.
+# Priority: a date typed into processed_data/manifest.csv > this file > snu_central/ingest/dates.py.
+# Leave a document out when it states no date: the app then shows "date not stated" instead of a guess.
+
+SNU Gender Policy Circular:
+  date: 2012-07-21
+  evidence: 'circular header "Policy against Sexual Harassment 21 July 2012 CIRCULAR" (p.1)'

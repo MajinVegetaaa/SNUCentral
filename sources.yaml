@@ -1,0 +1,68 @@
+# Document sources (FR-1.1). Checked 2026-11-22. See system_design.md §2.
+# Source order matters: when two sources hold an identical file, the earlier one is kept (FR-1.5).
+#
+# category: subject category from config.yaml `categories` (FR-1.2). Decides the folder
+#   static/documents/<category>/. Chosen per document as: entry `category` >
+#   first matching `category_rules` (regex on "<folder> > <title>") > source `category`.
+
+S1:
+  name: UG Handbook
+  category: academic_affairs
+  department: Office of Academic Affairs
+  type: pdf
+  urls:
+    - https://snu.edu.in/site/assets/files/11150/ug_handbook.pdf
+
+S2:
+  name: Student Handbook 2026
+  category: student_affairs
+  department: Office of Student Affairs
+  type: pdf
+  urls:
+    - https://snu.edu.in/site/assets/files/24802/student_handbook_2026_final_1.pdf
+
+S3:
+  name: Mandatory Disclosure (allow-list only)
+  category: university_administration
+  index_url: https://snu.edu.in/home/mandatory-disclosure/
+  type: pdf
+  # Student-relevant PDFs only; annual reports, UGC letters and committee notices excluded.
+  urls:
+    - url: https://snu.edu.in/site/assets/files/3875/disability_support_policy.pdf
+      title: Disability Support Policy
+      category: student_affairs
+    - url: https://snu.edu.in/site/assets/files/16490/anti_ragging_prevention_information.pdf
+      title: Anti-Ragging Prevention Information
+      category: student_affairs
+    - url: https://snu.edu.in/site/assets/files/21692/holiday_list__2026_1.pdf
+      title: Holiday List 2026
+    - url: https://snu.edu.in/site/assets/files/24802/revised_constitution__sgrc_18_may_2026_website.pdf
+      title: Student Grievance Redressal Committee
+      category: student_affairs
+    - url: https://snu.edu.in/site/assets/files/3875/examinations_committee.pdf
+      title: Examinations Committee
+      category: examinations
+
+S4:
+  name: SNU Links Student Policies
+  category: student_affairs          # default when no rule matches
+  index_url: https://snulinks.snu.edu.in/policies/student-policies
+  type: snulinks_embedded_pdf        # folder tree; each document page embeds its PDF as base64
+  exclude_titles:
+    - Anti Ragging Affidavit          # form, not policy text
+    - Outbound Student Mobility Portal
+    - Student Handbook               # already S2
+    - Dean's List - Archive          # lists of student names and roll numbers: personal data, not policy
+  category_rules:                    # first match wins
+    - {match: 'Examination Manual', category: examinations}
+    - {match: 'Outgoing Mobility|Outbound', category: international_office}
+    - {match: 'FN\d{3}|Fee Waiver|Reimbursement', category: finance}
+    - {match: 'Student Academic Policies|Transcript', category: academic_affairs}
+    - {match: 'Information Technology|IT\d{3}', category: university_administration}
+  # Auto-fill department (first match wins). Edit in manifest.csv if wrong.
+  departments:
+    - {match: 'Student Academic Policies', department: Office of Academic Affairs}
+    - {match: 'FN\d{3}', department: Finance Office}
+    - {match: 'Information Technology|IT\d{3}', department: IT Services}
+    - {match: 'ST\d{3}|Ragging|Gender|Substances|Security Camera|Whistleblower', department: Office of Student Affairs}
+  superseded_pattern: 'archive|old curriculum'

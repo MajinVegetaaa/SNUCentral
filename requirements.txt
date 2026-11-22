@@ -1,0 +1,7 @@
+pymupdf>=1.24
+requests>=2.31
+pyyaml>=6.0
+nltk>=3.8
+streamlit>=1.67     # chat submit_mode, badges and width="stretch" need a recent version
+openai>=1.40      # Groq exposes an OpenAI-compatible API
+pytest>=8.0

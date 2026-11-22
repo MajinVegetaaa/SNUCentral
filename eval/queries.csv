@@ -1,0 +1,26 @@
+query_id,query,answerable,notes
+Q01,What is the minimum attendance required to sit for exams?,1,
+Q02,How does the grading system convert marks to grade points?,1,
+Q03,What is the maximum number of credits I can take in a semester?,1,
+Q04,How can I change my major?,1,
+Q05,What are the criteria for the Dean's List?,1,
+Q06,What is the penalty for plagiarism or academic dishonesty?,1,
+Q07,Am I allowed to use ChatGPT or generative AI in my coursework?,1,
+Q08,What is the tuition fee refund policy if I withdraw?,1,
+Q09,How can I get a transcript issued?,1,
+Q10,What happens if a student violates the code of conduct?,1,
+Q11,How do I file a grievance against the university?,1,
+Q12,What is the anti-ragging policy and punishment for ragging?,1,
+Q13,What support is available for students with disabilities?,1,
+Q14,Can UG students work part time on campus and how many hours?,1,
+Q15,How are SWAYAM or MOOC courses credited?,1,
+Q16,How are grades converted for an outgoing exchange semester abroad?,1,
+Q17,What is the minimum class size to run a course?,1,
+Q18,What is the procedure for lateral entry admission?,1,
+Q19,Is consumption of alcohol or drugs on campus banned?,1,
+Q20,Who can access CCTV security camera footage to identify a student?,1,
+U01,What is the recipe for a good margherita pizza?,0,"unanswerable / off-topic (FR-5.9, FR-5.10)"
+U02,Who won the cricket world cup in 2023?,0,"unanswerable / off-topic (FR-5.9, FR-5.10)"
+U03,Write me an essay on climate change.,0,"unanswerable / off-topic (FR-5.9, FR-5.10)"
+U04,What is the cafeteria menu for tomorrow?,0,"unanswerable / off-topic (FR-5.9, FR-5.10)"
+U05,What is the placement package offered by Google at SNU?,0,"unanswerable / off-topic (FR-5.9, FR-5.10)"

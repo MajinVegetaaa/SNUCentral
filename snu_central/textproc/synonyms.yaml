@@ -1,0 +1,16 @@
+# SNU synonym and acronym dictionary for query expansion (FR-4.6).
+# Each group: any term in it expands to the others. Extend as you find vocabulary mismatches in eval.
+groups:
+  - [drop, withdraw, withdrawal]
+  - [cgpa, cumulative grade point average]
+  - [sgpa, semester grade point average]
+  - [fee, fees, tuition]
+  - [refund, reimbursement]
+  - [mess, dining]
+  - [hostel, residence, residential]
+  - [exam, examination, assessment]
+  - [re-evaluation, revaluation, recheck]
+  - [leave, absence]
+  - [ragging, harassment]
+  - [grievance, complaint]
+  - [scholarship, fee waiver, financial aid]

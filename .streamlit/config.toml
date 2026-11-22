@@ -1,0 +1,2 @@
+[server]
+enableStaticServing = true   # serves ./static at /app/static/ for PDF-at-page links (FR-6.3)

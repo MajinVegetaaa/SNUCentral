@@ -1,0 +1,52 @@
+# SNU Central settings (NFR-4.4). Change values here, not in code.
+
+paths:
+  documents: static/documents        # served by Streamlit at /app/static/documents/...
+  manifest: processed_data/manifest.csv
+  chunks: processed_data/chunks.jsonl
+  index: indexes/index.pkl
+  synonyms: snu_central/textproc/synonyms.yaml
+  document_dates: document_dates.yaml   # hand-checked dates for documents the extractor cannot date
+  query_log: logs/queries.jsonl
+
+# Subject categories (FR-1.2, spec §1.2/§3.2). Keys are folder names under static/documents/.
+categories:
+  academic_affairs: Academic Affairs
+  examinations: Examinations
+  student_affairs: Student Affairs
+  hostel: Hostel and Residential
+  finance: Finance and Fees
+  international_office: International Office
+  university_administration: University Administration
+
+chunking:
+  min_words: 40                      # merge shorter paragraphs with neighbours
+  max_words: 300                     # split longer ones
+  header_footer_ratio: 0.5           # a line on >50% of pages is a header/footer
+
+retrieval:
+  ranker: bm25                       # bm25 | tfidf
+  top_k: 5
+  context_top: 5                     # add the neighbouring chunks of the best N hits to the LLM prompt
+  context_cap: 10                    # at most this many passages sent to the LLM (~50 words each)
+  bm25_k1: 1.5
+  bm25_b: 0.5                        # 0.5 beat 0.75 on eval/: our chunks vary a lot in length
+  abstain_threshold: 0.20            # BM25 confidence = top score / best possible score (see gate.py). Deliberately permissive: a wrong abstention is worse than passing to the LLM, whose prompt rules decline off-topic questions. Re-run evaluate.py after re-indexing.
+
+llm:
+  provider: groq                     # groq | ollama
+  model: openai/gpt-oss-120b         # preferred; checked against the provider's live /models list at runtime
+  fallback_models:                   # tried in order if `model` is retired or unavailable
+    - openai/gpt-oss-20b
+    - llama-3.3-70b-versatile
+  base_url: https://api.groq.com/openai/v1
+  api_key_env: GROQ_API_KEY
+  backup_key_envs: [GROQ_API_KEY_2]   # used only if a key is rejected (401); same-org keys share rate limits
+  temperature: 0
+  reasoning_effort: low
+  timeout_seconds: 30
+  prompt_version: v4
+
+app:
+  max_input_chars: 500
+  stale_after_years: 3               # date warning on citations (FR-6.6)

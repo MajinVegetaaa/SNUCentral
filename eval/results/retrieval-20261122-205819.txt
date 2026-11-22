@@ -1,0 +1,63 @@
+Retrieval evaluation, K=5, 20 answerable queries
+
+== TFIDF ==
+  Q01  P@5=0.20  R@5=0.17  RR=0.33  conf=0.339  What is the minimum attendance required to sit for exam
+  Q02  P@5=0.40  R@5=0.67  RR=1.00  conf=0.427  How does the grading system convert marks to grade poin
+  Q03  P@5=0.20  R@5=0.33  RR=1.00  conf=0.579  What is the maximum number of credits I can take in a s
+  Q04  P@5=0.60  R@5=0.50  RR=0.50  conf=0.894  How can I change my major?
+  Q05  P@5=0.60  R@5=1.00  RR=0.33  conf=0.477  What are the criteria for the Dean's List?
+  Q06  P@5=0.40  R@5=0.40  RR=0.25  conf=0.269  What is the penalty for plagiarism or academic dishones
+  Q07  P@5=0.20  R@5=0.25  RR=0.20  conf=0.429  Am I allowed to use ChatGPT or generative AI in my cour
+  Q08  P@5=0.40  R@5=0.40  RR=0.33  conf=0.393  What is the tuition fee refund policy if I withdraw?
+  Q09  P@5=0.60  R@5=0.60  RR=1.00  conf=0.265  How can I get a transcript issued?
+  Q10  P@5=0.40  R@5=0.50  RR=0.50  conf=0.403  What happens if a student violates the code of conduct?
+  Q11  P@5=0.40  R@5=0.50  RR=0.50  conf=0.358  How do I file a grievance against the university?
+  Q12  P@5=0.40  R@5=0.50  RR=0.33  conf=0.383  What is the anti-ragging policy and punishment for ragg
+  Q13  P@5=0.40  R@5=0.40  RR=1.00  conf=0.369  What support is available for students with disabilitie
+  Q14  P@5=0.20  R@5=0.25  RR=0.25  conf=0.391  Can UG students work part time on campus and how many h
+  Q15  P@5=0.80  R@5=0.67  RR=0.50  conf=0.491  How are SWAYAM or MOOC courses credited?
+  Q16  P@5=0.00  R@5=0.00  RR=0.00  conf=0.453  How are grades converted for an outgoing exchange semes
+  Q17  P@5=0.40  R@5=0.67  RR=1.00  conf=0.527  What is the minimum class size to run a course?
+  Q18  P@5=0.60  R@5=0.60  RR=0.50  conf=0.316  What is the procedure for lateral entry admission?
+  Q19  P@5=0.60  R@5=0.60  RR=0.33  conf=0.363  Is consumption of alcohol or drugs on campus banned?
+  Q20  P@5=0.80  R@5=0.80  RR=1.00  conf=0.562  Who can access CCTV security camera footage to identify
+  U01  (unanswerable)  conf=0.416  gate=ok  What is the recipe for a good margherita pizz
+  U02  (unanswerable)  conf=0.308  gate=ok  Who won the cricket world cup in 2023?
+  U03  (unanswerable)  conf=0.181  gate=ok  Write me an essay on climate change.
+  U04  (unanswerable)  conf=0.252  gate=ok  What is the cafeteria menu for tomorrow?
+  U05  (unanswerable)  conf=0.235  gate=ok  What is the placement package offered by Goog
+  unanswerable rejected by vocabulary check alone: 0/5
+  tuned tau=0.265 (accuracy on answerable+unanswerable: 92%)
+
+== BM25 ==
+  Q01  P@5=0.60  R@5=0.50  RR=1.00  conf=0.291  What is the minimum attendance required to sit for exam
+  Q02  P@5=0.40  R@5=0.67  RR=1.00  conf=0.449  How does the grading system convert marks to grade poin
+  Q03  P@5=0.60  R@5=1.00  RR=1.00  conf=0.456  What is the maximum number of credits I can take in a s
+  Q04  P@5=0.40  R@5=0.33  RR=1.00  conf=0.679  How can I change my major?
+  Q05  P@5=0.60  R@5=1.00  RR=0.50  conf=0.570  What are the criteria for the Dean's List?
+  Q06  P@5=0.40  R@5=0.40  RR=0.50  conf=0.271  What is the penalty for plagiarism or academic dishones
+  Q07  P@5=0.60  R@5=0.75  RR=1.00  conf=0.221  Am I allowed to use ChatGPT or generative AI in my cour
+  Q08  P@5=0.60  R@5=0.60  RR=1.00  conf=0.227  What is the tuition fee refund policy if I withdraw?
+  Q09  P@5=0.80  R@5=0.80  RR=1.00  conf=0.354  How can I get a transcript issued?
+  Q10  P@5=0.40  R@5=0.50  RR=0.50  conf=0.412  What happens if a student violates the code of conduct?
+  Q11  P@5=0.40  R@5=0.50  RR=0.33  conf=0.330  How do I file a grievance against the university?
+  Q12  P@5=0.40  R@5=0.50  RR=0.33  conf=0.325  What is the anti-ragging policy and punishment for ragg
+  Q13  P@5=0.60  R@5=0.60  RR=1.00  conf=0.548  What support is available for students with disabilitie
+  Q14  P@5=0.40  R@5=0.50  RR=0.33  conf=0.267  Can UG students work part time on campus and how many h
+  Q15  P@5=0.80  R@5=0.67  RR=1.00  conf=0.540  How are SWAYAM or MOOC courses credited?
+  Q16  P@5=0.00  R@5=0.00  RR=0.00  conf=0.210  How are grades converted for an outgoing exchange semes
+  Q17  P@5=0.60  R@5=1.00  RR=1.00  conf=0.437  What is the minimum class size to run a course?
+  Q18  P@5=0.80  R@5=0.80  RR=1.00  conf=0.420  What is the procedure for lateral entry admission?
+  Q19  P@5=0.60  R@5=0.60  RR=1.00  conf=0.295  Is consumption of alcohol or drugs on campus banned?
+  Q20  P@5=0.80  R@5=0.80  RR=1.00  conf=0.418  Who can access CCTV security camera footage to identify
+  U01  (unanswerable)  conf=0.713  gate=ok  What is the recipe for a good margherita pizz
+  U02  (unanswerable)  conf=0.177  gate=ok  Who won the cricket world cup in 2023?
+  U03  (unanswerable)  conf=0.172  gate=ok  Write me an essay on climate change.
+  U04  (unanswerable)  conf=0.236  gate=ok  What is the cafeteria menu for tomorrow?
+  U05  (unanswerable)  conf=0.224  gate=ok  What is the placement package offered by Goog
+  unanswerable rejected by vocabulary check alone: 0/5
+  tuned tau=0.210 (accuracy on answerable+unanswerable: 88%)
+
+Ranker       P@5     R@5     MRR
+tfidf      0.430   0.490   0.543
+bm25       0.540   0.626   0.775
